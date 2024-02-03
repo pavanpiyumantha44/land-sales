@@ -1,12 +1,18 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // enable set cookie
+}));
 
 mongoose.connect(process.env.MONGO)
 .then(res=>{
